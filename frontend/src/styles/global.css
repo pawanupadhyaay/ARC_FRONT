@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Custom Styles */
+body {
+  @apply bg-black text-white font-sans;
+}
+
+button {
+  @apply transition-all duration-200 ease-in-out;
+}
