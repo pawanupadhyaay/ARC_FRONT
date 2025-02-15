@@ -1,68 +1,114 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const SignUp = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({ email: "", username: "", password: "" });
+const SignUpPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    displayName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const handleNext = () => setStep(step + 1);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+ 
 
   return (
     <div className="h-screen bg-gradient-to-b from-black to-purple-900 flex flex-col items-center justify-center text-white p-6">
-      <div className="max-w-xs w-full">
-        {/* Step 1: Sign Up Form */}
-        {step === 1 && (
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-6">Sign Up</h2>
-            
-            <input
-              className="block w-full mt-3 p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              type="email"
-              placeholder="Email"
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            />
-            <input
-              className="block w-full mt-3 p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              type="text"
-              placeholder="Username"
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-            />
-            <input
-              className="block w-full mt-3 p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            />
-
-            {/* Continue Button */}
-            <button 
-              className="mt-6 bg-purple-600 w-full py-3 rounded-lg text-lg font-medium hover:bg-purple-700"
-              onClick={handleNext}
-            >
-              Continue
-            </button>
-          </div>
-        )}
-
-        {/* Step 2: Confirmation Code */}
-        {step === 2 && (
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-6">Enter Confirmation Code</h2>
-            
-            <input
-              className="block w-full mt-3 p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              type="text"
-              placeholder="Confirmation Code"
-            />
-
-            {/* Continue Button */}
-            <button className="mt-6 bg-purple-600 w-full py-3 rounded-lg text-lg font-medium hover:bg-purple-700">
-              Continue
-            </button>
-          </div>
-        )}
+      
+      {/* Navigation Back */}
+      <div className="absolute top-6 left-6 cursor-pointer" onClick={() => navigate(-1)}>
+        <span className="text-lg">←</span>
       </div>
+
+      {/* Title */}
+      <motion.h1
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-2xl font-bold text-white"
+      >
+        Sign Up
+      </motion.h1>
+
+      {/* Progress Indicator */}
+      <div className="flex space-x-2 mt-2">
+        <div className="w-8 h-1 bg-orange-400 rounded-full"></div>
+        <div className="w-8 h-1 bg-gray-500 rounded-full"></div>
+        <div className="w-8 h-1 bg-gray-500 rounded-full"></div>
+      </div>
+
+      <p className="mt-6 text-gray-300">Get Started</p>
+
+      {/* Form */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 1 }}
+        className="w-full max-w-xs mt-4 space-y-4"
+      >
+        {/* Input Fields */}
+        {[
+          { name: "email", placeholder: "Email or Phone Number *" },
+          { name: "displayName", placeholder: "Display Name *" },
+          { name: "username", placeholder: "Username *" },
+          { name: "password", placeholder: "Password *", type: "password" },
+          { name: "confirmPassword", placeholder: "Confirm Password *", type: "password" },
+        ].map((field, index) => (
+          <div key={index}>
+            <input
+              type={field.type || "text"}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={handleChange}
+              className="w-full p-3 rounded-lg bg-black bg-opacity-30 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-300"
+            />
+          </div>
+        ))}
+
+        {/* Password Requirements */}
+        <div className="text-sm text-gray-400">
+          <p>🔸 Must contain at least 8 characters, 1 special symbol (@, #, %, !), and 1 number.</p>
+          <p>🔸 May not include your name or birth date.</p>
+        </div>
+
+        {/* Continue Button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="bg-purple-600 w-full py-3 mt-4 rounded-lg text-lg font-medium hover:bg-purple-700 transition-all"
+          onClick={() => navigate("/email-conformation")}
+        >
+          Continue
+        </motion.button>
+
+        {/* Terms & Conditions */}
+        <p className="text-xs text-gray-400 text-center mt-2">
+          By clicking continue, you agree to our{" "}
+          <span className="text-orange-400 cursor-pointer hover:underline">Terms of Service</span> and{" "}
+          <span className="text-orange-400 cursor-pointer hover:underline">Privacy Policy</span>.
+        </p>
+
+        {/* Log In Link */}
+        <p className="mt-4 text-sm text-gray-300 text-center">
+          Already have an account?{" "}
+          <span
+            className="text-orange-400 cursor-pointer hover:underline"
+            onClick={() => navigate("/login")}
+          >
+            Log in
+          </span>
+        </p>
+      </motion.div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignUpPage;
