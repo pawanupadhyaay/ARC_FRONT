@@ -9,6 +9,7 @@ const ConfirmCodePage = () => {
 
   const handleConfirm = () => {
     console.log("Entered Code:", confirmationCode);
+    navigate("/signup-selection")
     // Add code verification logic here
   };
 
@@ -18,49 +19,53 @@ const ConfirmCodePage = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-b from-black to-purple-900 flex flex-col items-center justify-center text-white p-6">
-      
+    <div className="h-screen bg-gradient-to-b from-black to-purple-900 flex flex-col items-center justify-center text-white p-6 space-y-8">
       {/* Navigation Back */}
-      <div className="absolute top-6 left-6 cursor-pointer" onClick={() => navigate(-1)}>
+      <div
+        className="absolute top-6 left-6 cursor-pointer"
+        onClick={() => navigate(-1)}
+      >
         <span className="text-lg">←</span>
       </div>
 
-      {/* Title */}
-      <motion.h1
+      {/* Title & Progress */}
+      <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-2xl font-bold text-white"
+        className="flex flex-col items-center space-y-4"
       >
-        Sign Up
-      </motion.h1>
+        <h1 className="text-2xl font-bold text-white">Sign Up</h1>
 
-      {/* Progress Indicator */}
-      <div className="flex space-x-2 mt-2">
-        <div className="w-8 h-1 bg-orange-400 rounded-full"></div>
-        <div className="w-8 h-1 bg-orange-400 rounded-full"></div>
-        <div className="w-8 h-1 bg-gray-500 rounded-full"></div>
-      </div>
+        {/* Progress Indicator */}
+        <div className="flex space-x-6">
+          <div className="w-8 h-1 bg-orange-400 rounded-full"></div>
+          <div className="w-8 h-1 bg-orange-400 rounded-full"></div>
+          <div className="w-8 h-1 bg-gray-500 rounded-full"></div>
+        </div>
+      </motion.div>
 
       {/* Confirmation Message */}
-      <motion.p
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 1 }}
-        className="mt-8 text-gray-300 text-center"
+        className="text-center space-y-3"
       >
-        A confirmation code was sent to <br />
-        <span className="font-semibold text-white">{userEmail}</span>.
-      </motion.p>
+        <p className="text-gray-300">
+          A confirmation code was sent to <br />
+          <span className="font-semibold text-white">{userEmail}</span>.
+        </p>
 
-      <p className="mt-2 text-gray-400">Check your email and enter the code below.</p>
+        <p className="text-gray-400">Check your email and enter the code below.</p>
+      </motion.div>
 
       {/* Confirmation Code Input */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 1 }}
-        className="w-full max-w-xs mt-6"
+        className="w-full max-w-xs space-y-6"
       >
         <input
           type="text"
@@ -71,7 +76,7 @@ const ConfirmCodePage = () => {
         />
 
         {/* Resend Code */}
-        <p className="mt-2 text-sm text-gray-400 text-center">
+        <p className="text-sm text-gray-400 text-center">
           Didn’t receive a code?{" "}
           <span
             className="text-orange-400 cursor-pointer hover:underline"
@@ -86,7 +91,7 @@ const ConfirmCodePage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
-          className="bg-purple-600 w-full py-3 mt-6 rounded-lg text-lg font-medium hover:bg-purple-700 transition-all"
+          className="bg-purple-600 w-full py-3 rounded-lg text-lg font-medium hover:bg-purple-700 transition-all"
           onClick={handleConfirm}
         >
           Continue

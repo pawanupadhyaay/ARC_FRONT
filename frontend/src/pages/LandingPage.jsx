@@ -15,15 +15,14 @@ const LandingPage = () => {
 
   return (
     <div className="h-screen bg-gradient-to-b from-black to-purple-900 flex flex-col items-center justify-center text-white p-6">
-      
       {/* Animated Logo Entrance */}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: -10 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="flex flex-col items-center"
+        className="flex flex-col items-center h-40"
       >
-        <img src={SquadHuntLogo} alt="SquadHunt Logo" className="w-40 " />
+        <img src={SquadHuntLogo} alt="SquadHunt Logo" className="w-40" />
       </motion.div>
 
       {/* Main Content - Appears After Logo Animation */}
@@ -40,13 +39,13 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="text-2xl font-bold text-orange-400 text-center"
+              className="text-xl font-bold text-orange-400 text-center"
             >
-              Gaming is a Passion & eSports is a Career
+              <p>Gaming is a Passion</p> & <p>eSports is a Career</p>
             </motion.h1>
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-col w-full space-y-4">
+            <div className="mt-8 h-min-[221px] w-min-[270px] flex flex-col w-full space-y-2">
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -71,7 +70,7 @@ const LandingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="flex items-center justify-center bg-white text-black w-full py-3 rounded-lg text-lg font-medium hover:opacity-90 transition-all"
+                className="flex items-center justify-center  text-white w-full py-3 rounded-lg text-lg font-medium hover:opacity-90 transition-all"
               >
                 <img src={GoogleIcon} alt="Google" className="w-6 mr-2" />
                 Sign Up with Google
