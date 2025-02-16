@@ -16,13 +16,13 @@ const SignUpPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- 
-
   return (
     <div className="h-screen bg-gradient-to-b from-black to-purple-900 flex flex-col items-center justify-center text-white p-6">
-      
       {/* Navigation Back */}
-      <div className="absolute top-6 left-6 cursor-pointer" onClick={() => navigate(-1)}>
+      <div
+        className="absolute top-6 left-6 cursor-pointer"
+        onClick={() => navigate(-1)}
+      >
         <span className="text-lg">←</span>
       </div>
 
@@ -43,7 +43,9 @@ const SignUpPage = () => {
         <div className="w-8 h-1 bg-gray-500 rounded-full"></div>
       </div>
 
-      <p className="mt-6 text-gray-300">Get Started</p>
+      <div className="text-left w-full pl-8">
+        <p className="mt-6 text-gray-300">Get Started</p>
+      </div>
 
       {/* Form */}
       <motion.div
@@ -58,23 +60,33 @@ const SignUpPage = () => {
           { name: "displayName", placeholder: "Display Name *" },
           { name: "username", placeholder: "Username *" },
           { name: "password", placeholder: "Password *", type: "password" },
-          { name: "confirmPassword", placeholder: "Confirm Password *", type: "password" },
+          {
+            name: "confirmPassword",
+            placeholder: "Confirm Password *",
+            type: "password",
+          },
         ].map((field, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            className="relative w-full  rounded-b-none after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-gradient-to-r after:from-pink-500 after:via-purple-500 after:to-indigo-500 after:rounded-bl-xl after:rounded-br-"
+          >
             <input
               type={field.type || "text"}
               name={field.name}
               placeholder={field.placeholder}
               value={formData[field.name]}
               onChange={handleChange}
-              className="w-full p-3 rounded-lg bg-black bg-opacity-30 text-white border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-300"
+              className="w-full px-4 py-3 text-gray-300 bg-[#1a1a2e]  outline-none border-none focus:ring-0 rounded-tl-xl rounded-tr-xl"
             />
           </div>
         ))}
 
         {/* Password Requirements */}
         <div className="text-sm text-gray-400">
-          <p>🔸 Must contain at least 8 characters, 1 special symbol (@, #, %, !), and 1 number.</p>
+          <p>
+            🔸 Must contain at least 8 characters, 1 special symbol (@, #, %,
+            !), and 1 number.
+          </p>
           <p>🔸 May not include your name or birth date.</p>
         </div>
 
@@ -92,8 +104,14 @@ const SignUpPage = () => {
         {/* Terms & Conditions */}
         <p className="text-xs text-gray-400 text-center mt-2">
           By clicking continue, you agree to our{" "}
-          <span className="text-orange-400 cursor-pointer hover:underline">Terms of Service</span> and{" "}
-          <span className="text-orange-400 cursor-pointer hover:underline">Privacy Policy</span>.
+          <span className="text-orange-400 cursor-pointer hover:underline">
+            Terms of Service
+          </span>{" "}
+          and{" "}
+          <span className="text-orange-400 cursor-pointer hover:underline">
+            Privacy Policy
+          </span>
+          .
         </p>
 
         {/* Log In Link */}
